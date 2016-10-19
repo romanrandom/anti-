@@ -68,7 +68,7 @@ export default class PlayerExperience extends soundworks.Experience {
     // initialize rendering
     // @param sticker tapped Callback
     // @param number of stickers
-    this.renderer = new PlayerRenderer(this.tapped, 2);
+    this.renderer = new PlayerRenderer(this.tapped, 22);
 
     this.view.addRenderer(this.renderer);
 

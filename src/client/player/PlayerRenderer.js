@@ -31,8 +31,8 @@ export default class PlayerRenderer extends Renderer {
         this.stickers[i] = new Image();
 
         this.stickers[i].onload = (e) => {
-            const imgElement = e.path[0] || e.target;
-            console.log(imgElement.src.match("s/stick(.*)\\."));
+            console.log(e);
+            const imgElement = e.path ? e.path[0] : e.target;
             // imgElement.src.match
             const antimg = new Konva.Image({
                 x: Math.random() * this.stage.attrs.width,
@@ -60,7 +60,7 @@ export default class PlayerRenderer extends Renderer {
         };
         this.stickers[i].src = `stickers/stick${i + 1}.png`;
     }
-    console.log(this.layer);
+    //console.log(this.layer);
 
 
 }
