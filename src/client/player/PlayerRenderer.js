@@ -58,7 +58,7 @@ export default class PlayerRenderer extends Renderer {
             // add the layer to the stage
             this.stage.add(this.layer);
         };
-        this.stickers[i].src = `stickers/stick${i + 1}.jpg`;
+        this.stickers[i].src = `stickers/stick${i + 1}.png`;
     }
     console.log(this.layer);
 

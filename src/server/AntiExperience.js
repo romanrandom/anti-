@@ -34,7 +34,7 @@ export default class PlayerExperience extends Experience {
 
     this.receive(client, 'sticker', sticker => {
         console.log(sticker);
-        //this.osc.send('/osc/channel2', [client.team, sticker]);
+        // this.osc.send('/osc/channel2', [client.team, sticker]);
     });
   }
 
