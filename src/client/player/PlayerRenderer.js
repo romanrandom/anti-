@@ -31,8 +31,9 @@ export default class PlayerRenderer extends Renderer {
         this.stickers[i] = new Image();
 
         this.stickers[i].onload = (e) => {
-console.log(e);
             const imgElement = e.path[0] || e.target;
+            console.log(imgElement.src.match("s/stick(.*)\\."));
+            // imgElement.src.match
             const antimg = new Konva.Image({
                 x: Math.random() * this.stage.attrs.width,
                 y: Math.random() * this.stage.attrs.height,
@@ -40,15 +41,15 @@ console.log(e);
                 width: 150,
                 height: 150,
                 rotation: Math.random() * 60,
-                draggable: true
+                draggable: true,
+                id: imgElement.src.match("s/stick(.*)\\.")[1]
             });
 
             //antimg.offsetX(antimg.width / 2);
             //antimg.offsetY(antimg.height / 2);
 
             antimg.on('tap', () => {
-                console.log(i);
-                this.tapCallback(i);
+                this.tapCallback(antimg.attrs.id);
             });
 
             // add the shape to the layer
