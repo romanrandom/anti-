@@ -31,11 +31,12 @@ export default class PlayerRenderer extends Renderer {
         this.stickers[i] = new Image();
 
         this.stickers[i].onload = (e) => {
-
+console.log(e);
+            const imgElement = e.path[0] || e.target;
             const antimg = new Konva.Image({
                 x: Math.random() * this.stage.attrs.width,
                 y: Math.random() * this.stage.attrs.height,
-                image: e.path[0],
+                image: imgElement,
                 width: 150,
                 height: 150,
                 rotation: Math.random() * 60,
@@ -46,6 +47,7 @@ export default class PlayerRenderer extends Renderer {
             //antimg.offsetY(antimg.height / 2);
 
             antimg.on('tap', () => {
+                console.log(i);
                 this.tapCallback(i);
             });
 
