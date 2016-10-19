@@ -23,7 +23,7 @@ void setup() {
    * and the port of the remote location address are the same, hence you will
    * send messages back to this sketch.
    */
-  myRemoteLocation = new NetAddress("192.168.0.19", 10000);
+  myRemoteLocation = new NetAddress("127.0.0.1", 10001);
 }
 
 
@@ -47,7 +47,8 @@ void oscEvent(OscMessage theOscMessage) {
   /* in the following different ways of creating osc messages are shown by example */
   OscMessage myMessage = new OscMessage("/anti");
   
-  myMessage.add(123); /* add an int to the osc message */
+  myMessage.add(theOscMessage.get(0).floatValue()); /* add an int to the osc message */
+  myMessage.add(theOscMessage.get(1).stringValue()); /* add an int to the osc message */
 
   /* send the message */
   oscP5.send(myMessage, myRemoteLocation); 
