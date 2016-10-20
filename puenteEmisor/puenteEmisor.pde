@@ -11,8 +11,6 @@ OscP5 oscP5;
 NetAddress myRemoteLocation;
 
 void setup() {
-  size(400,400);
-  frameRate(25);
   /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this, 10000);
   
@@ -30,17 +28,6 @@ void setup() {
 void draw() {
   background(0);  
 }
-
-void mousePressed() {
-  /* in the following different ways of creating osc messages are shown by example */
-  OscMessage myMessage = new OscMessage("/test");
-  
-  myMessage.add(123); /* add an int to the osc message */
-
-  /* send the message */
-  oscP5.send(myMessage, myRemoteLocation); 
-}
-
 
 /* incoming osc message are forwarded to the oscEvent method. */
 void oscEvent(OscMessage theOscMessage) {

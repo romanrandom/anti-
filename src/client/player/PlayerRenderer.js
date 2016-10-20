@@ -23,47 +23,51 @@ export default class PlayerRenderer extends Renderer {
   /**
    * Initialize renderer state.
    */
-   init() {
+    init() {
 
-    this.layer = new Konva.Layer();
+        this.layer = new Konva.Layer();
+        this.stickerSize = 150;
+        for (var i = 0; i < this.stickers.length; i++) {
+            this.stickers[i] = new Image();
 
-    for (var i = 0; i < this.stickers.length; i++) {
-        this.stickers[i] = new Image();
+            this.stickers[i].onload = (e) => {
+                // console.log(e);
+                const imgElement = e.path ? e.path[0] : e.target;
+                // imgElement.src.match
+                const antimg = new Konva.Image({
+                    x: this.stickerSize / 2 + Math.random() * this.stage.attrs.width - this.stickerSize,
+                    y: this.stickerSize / 2 + Math.random() * this.stage.attrs.height - this.stickerSize,
+                    image: imgElement,
+                    width: this.stickerSize,
+                    height: this.stickerSize,
+                    rotation: Math.random() * 180 - 90,
+                    draggable: true,
+                    idAnti: imgElement.src.match("s/stick(.*)\\.")[1]
+                });
 
-        this.stickers[i].onload = (e) => {
-            console.log(e);
-            const imgElement = e.path ? e.path[0] : e.target;
-            // imgElement.src.match
-            const antimg = new Konva.Image({
-                x: Math.random() * this.stage.attrs.width,
-                y: Math.random() * this.stage.attrs.height,
-                image: imgElement,
-                width: 150,
-                height: 150,
-                rotation: Math.random() * 60,
-                draggable: true,
-                id: imgElement.src.match("s/stick(.*)\\.")[1]
-            });
+                //antimg.offsetX(antimg.width / 2);
+                //antimg.offsetY(antimg.height / 2);
 
-            //antimg.offsetX(antimg.width / 2);
-            //antimg.offsetY(antimg.height / 2);
+                antimg.on('mousedown touchstart', (e) => {
 
-            antimg.on('tap', () => {
-                this.tapCallback(antimg.attrs.id);
-            });
+                    antimg.setZIndex(100);
 
-            // add the shape to the layer
-            this.layer.add(antimg);
+                    this.tapCallback(antimg.attrs.idAnti);
+                });
 
-            // add the layer to the stage
-            this.stage.add(this.layer);
-        };
-        this.stickers[i].src = `stickers/stick${i + 1}.png`;
+                antimg.cache();
+                antimg.drawHitFromCache();
+
+                // add the shape to the layer
+                this.layer.add(antimg);
+
+                // add the layer to the stage
+                this.stage.add(this.layer);
+            };
+            this.stickers[i].src = `stickers/stick${i + 1}.png`;
+        }
+        //console.log(this.layer);
     }
-    //console.log(this.layer);
-
-
-}
 
   /**
    * Update rederer state.
