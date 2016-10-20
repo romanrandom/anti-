@@ -52,6 +52,7 @@ export default class PlayerRenderer extends Renderer {
                     height: this.stickerSize,
                     rotation: Math.random() * 180 - 90,
                     draggable: true,
+                    dragDistance: 5,
                     idAnti: imgElement.src.match("s/stick(.*)\\.")[1]
                 });
 
@@ -72,6 +73,7 @@ export default class PlayerRenderer extends Renderer {
                 });
 
                 antimg.on('click tap', (e) => {
+                    antimg.setZIndex(100);
                     background.tween.play();
                     setTimeout(() => {
                         background.tween.reverse();
