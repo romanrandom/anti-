@@ -26,6 +26,16 @@ export default class PlayerRenderer extends Renderer {
     init() {
 
         this.layer = new Konva.Layer();
+
+        let background = new Konva.Rect({
+            x: 0,
+            y: 0,
+            width: this.stage.attrs.width,
+            height: this.stage.attrs.height,
+            fill: 'black', //background color
+        });
+        this.layer.add(background);
+
         this.stickerSize = 150;
         for (var i = 0; i < this.stickers.length; i++) {
             this.stickers[i] = new Image();
@@ -45,21 +55,51 @@ export default class PlayerRenderer extends Renderer {
                     idAnti: imgElement.src.match("s/stick(.*)\\.")[1]
                 });
 
-                //antimg.offsetX(antimg.width / 2);
-                //antimg.offsetY(antimg.height / 2);
+                // TAP event
 
-                antimg.on('mousedown touchstart', (e) => {
+                antimg.on('dragstart', (e) => {
 
                     antimg.setZIndex(100);
 
+                    antimg.tween.play();
+                });
+
+
+                antimg.on('dragend', (e) => {
+
+                    antimg.tween.reverse();
+
+                });
+
+                antimg.on('click tap', (e) => {
+                    background.tween.play();
+                    setTimeout(() => {
+                        background.tween.reverse();
+                    }, 300);
                     this.tapCallback(antimg.attrs.idAnti);
                 });
+
 
                 antimg.cache();
                 antimg.drawHitFromCache();
 
                 // add the shape to the layer
                 this.layer.add(antimg);
+
+                antimg.tween = new Konva.Tween({
+                    node: antimg,
+                    scaleX: 1.2,
+                    scaleY: 1.2,
+                    easing: Konva.Easings.BounceEaseInOut,
+                    duration: 0.1
+                });
+
+                background.tween = new Konva.Tween({
+                    node: background,
+                    fill: 'red',
+                    easing: Konva.Easings.StrongEaseInOut,
+                    duration: 0.2
+                });
 
                 // add the layer to the stage
                 this.stage.add(this.layer);
@@ -84,8 +124,8 @@ export default class PlayerRenderer extends Renderer {
    */
   render(ctx) {
     // canvas operations
-    ctx.save();
-
-    ctx.restore();
+    // ctx.save();
+    //
+    // ctx.restore();
   }
 }
