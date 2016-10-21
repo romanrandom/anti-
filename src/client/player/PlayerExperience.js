@@ -8,20 +8,19 @@ const viewTemplate = `
   <div class="foreground">
     <div class="section-top flex-middle"></div>
     <div class="section-center flex-center">
-
     </div>
     <div class="section-bottom flex-middle"></div>
   </div>
 `;
 
-// this experience plays a sound when it starts, and plays another sound when
-// other clients join the experience
+
 export default class PlayerExperience extends soundworks.Experience {
   constructor(assetsDomain, audioFiles) {
     super();
 
     this.platform = this.require('platform', { features: ['wake-lock'] });
     this.checkin = this.require('checkin', { showDialog: false });
+    this.params = this.require('shared-params');
     this.loader = this.require('loader', {
       assetsDomain: assetsDomain,
       files: audioFiles,
@@ -60,6 +59,14 @@ export default class PlayerExperience extends soundworks.Experience {
     //   src.connect(audioContext.destination);
     //   src.start(audioContext.currentTime + delay);
     // });
+    //
+    //
+    this.params.addParamListener('gol', () => {
+        const src = audioContext.createBufferSource();
+        src.buffer = this.loader.buffers[Math.floor(Math.random() * this.loader.buffers.length)];
+        src.connect(audioContext.destination);
+        src.start(audioContext.currentTime);
+    });
 
     this.tapped = (stickerID) => {
         this.send('sticker', stickerID);

@@ -7,10 +7,13 @@ export default class PlayerExperience extends Experience {
     super(clientTypes);
 
     this.checkin = this.require('checkin');
+    this.params = this.require('shared-params');
     this.osc = this.require('osc');
     this.sharedConfig = this.require('shared-config');
 
     this.lastTeam = 0; // Team assigned to the last player who joined
+
+    this.params.addParamListener('gol', (value) => this.osc.send('/osc/channel2', [2]));
   }
 
   // if anything needs to append when the experience starts
@@ -31,12 +34,8 @@ export default class PlayerExperience extends Experience {
     } else {
         client.team = this.lastTeam = 0;
     }
-     
-    this.receive(client, 'sticker', sticker => {
-                 
-        console.log(sticker);
-        this.osc.send('/osc/channel2', [client.team, sticker]);
-    });
+
+    this.receive(client, 'sticker', sticker => this.osc.send('/osc/channel2', [client.team, sticker]));
   }
 
   exit(client) {

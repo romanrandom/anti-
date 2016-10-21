@@ -52,7 +52,7 @@ export default class PlayerRenderer extends Renderer {
                     height: this.stickerSize,
                     rotation: Math.random() * 180 - 90,
                     draggable: true,
-                    dragDistance: 5,
+                    dragDistance: 10,
                     idAnti: imgElement.src.match("s/stick(.*)\\.")[1]
                 });
 
@@ -92,8 +92,8 @@ export default class PlayerRenderer extends Renderer {
                     node: antimg,
                     scaleX: 1.2,
                     scaleY: 1.2,
-                    easing: Konva.Easings.BounceEaseInOut,
-                    duration: 0.1
+                    easing: Konva.Easings.EaseInOut,
+                    duration: 0.2
                 });
 
                 background.tween = new Konva.Tween({

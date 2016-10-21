@@ -25,8 +25,7 @@ void setup() {
 }
 
 
-void draw() {
-  background(0);  
+void draw() { 
 }
 
 /* incoming osc message are forwarded to the oscEvent method. */
@@ -37,7 +36,7 @@ void oscEvent(OscMessage theOscMessage) {
   myMessage.add(theOscMessage.get(0).floatValue()); /* add an int to the osc message */
   myMessage.add(theOscMessage.get(1).stringValue());
   /* send the message */
-  oscP5.send(myMessage, myRemoteLocation); 
+  oscP5.send(myMessage, myRemoteLocation);
   /* print the address pattern and the typetag of the received OscMessage */
   print("### received an osc message.");
   print(" addrpattern: "+theOscMessage.addrPattern());

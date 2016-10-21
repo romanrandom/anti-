@@ -31,7 +31,7 @@ export default {
 
   // content of the `loader` service
   'service:loader': {
-    loading: 'Loading sounds…',
+    loading: 'Cagando...',
   },
 
   // content of the `locator` service

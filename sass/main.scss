@@ -39,3 +39,11 @@
     font-size: 5rem;
     color: $alizarin;
 }
+
+#basic-shared-controller .waves-basic-controllers.small:not(.align-small), .inner-wrapper, .buttons .btn {
+    height: 100% !important;
+}
+
+#basic-shared-controller .waves-basic-controllers .btn {
+    color: transparent;
+}
