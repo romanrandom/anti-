@@ -8,7 +8,7 @@ import viewContent from '../shared/viewContent';
 const files = [
   'sounds/gol1.mp3',
   'sounds/gol2.mp3',
-  'sounds/gol3.mp3',
+
 ];
 
 // launch application when document is fully loaded
