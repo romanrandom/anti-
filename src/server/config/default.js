@@ -17,7 +17,7 @@ export default {
 
   // version of application, can be used to force reload css and js files
   // from server (cf. `html/default.ejs`)
-  version: '0.0.1',
+  version: '0.1.0',
 
   // name of the default client type, i.e. the client that can access the
   // application at its root URL
@@ -29,7 +29,7 @@ export default {
   assetsDomain: '/',
 
   // port used to open the http server, in production this value is typically 80
-  port: 8000,
+  port: 80,
 
   // describe the location where the experience takes places, theses values are
   // used by the `placer`, `checkin` and `locator` services.
@@ -77,7 +77,7 @@ export default {
   },
 
   // password to be used by the `auth` service
-  password: '',
+  password: 'rr',
 
   // configuration of the `osc` service
   osc: {
