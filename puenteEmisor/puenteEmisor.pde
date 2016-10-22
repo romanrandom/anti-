@@ -28,19 +28,26 @@ void setup() {
 void draw() { 
 }
 
-/* incoming osc message are forwarded to the oscEvent method. */
+
 void oscEvent(OscMessage theOscMessage) {
-  /* in the following different ways of creating osc messages are shown by example */
+  int sticker = 0;
+  int team = int(theOscMessage.get(0).floatValue()); // Teams 0,1 Goal: 2
+  if (theOscMessage.get(1) != null) {
+    sticker = int(theOscMessage.get(1).stringValue());
+  }
+  print(" addrpattern: " + theOscMessage.addrPattern());
+  println(" typetag: " + theOscMessage.typetag());
+  println(" team: " + team);
+  println(" sticker: " + sticker);
+  
   OscMessage myMessage = new OscMessage("/anti");
   
-  myMessage.add(theOscMessage.get(0).floatValue()); /* add an int to the osc message */
-  myMessage.add(theOscMessage.get(1).stringValue());
+  myMessage.add(team); /* add an int to the osc message */
+  myMessage.add(sticker);
+
   /* send the message */
   oscP5.send(myMessage, myRemoteLocation);
-  /* print the address pattern and the typetag of the received OscMessage */
-  print("### received an osc message.");
-  print(" addrpattern: "+theOscMessage.addrPattern());
-  println(" typetag: "+theOscMessage.typetag());
-  println(" value 1: "+theOscMessage.get(0).floatValue());
-  println(" value 1: "+theOscMessage.get(1).stringValue());
+  
+  
+  
 }
